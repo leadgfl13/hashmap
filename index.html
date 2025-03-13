@@ -18,7 +18,7 @@
 				constructor(loadfactor, capacity) {
 					this.loadfactor = loadfactor;
 					this.capacity = capacity;
-					this.buckets = new Array();
+					this.buckets = new Array(capacity);
 				}
 
 				hash(key) {
@@ -33,15 +33,11 @@
 				}
 
 				set(key, value) {
-					console.log("the value is " + value);
-					console.log("the capacity is " + this.capacity);
-					if (value < 0 || value > this.capacity) {
-						console.log("Not in the buckets");
-					} else console.log("It can be put in a bucket");
-					console.log("Putting in bucket " + value);
-					console.log(this.buckets);
-					this.buckets[value].push(key, value);
-					console.log(this.buckets);
+					let index = this.hash(key);
+					if (!this.buckets[index]) {
+						this.buckets[index] = [];
+					}
+					this.buckets[index].push([key, value]);
 				}
 				get(key) {}
 				has(key) {}
@@ -61,11 +57,9 @@
 			let kyle = "kyle";
 
 			let mymap = new hashMap(0.75, 16);
+			console.log(mymap.hash(gary));
 			mymap.set(gary, mymap.hash(gary));
-			console.log(mymap.hash(leader));
-			console.log(mymap.hash(john));
-			console.log(mymap.hash(kyle));
-			console.log(mymap.hash(gray));
+			console.log(mymap);
 		</script>
 	</body>
 </html>
