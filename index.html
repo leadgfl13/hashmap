@@ -56,7 +56,18 @@
 
 				has(key) {}
 				remove(key) {}
-				length() {}
+				length() {
+					let length = 0;
+					for (let bucket of this.buckets) {
+						if (bucket) {
+							for (let i = 0; i < bucket.length; i++) {
+								length++;
+							}
+						}
+					}
+					return length;
+				}
+
 				clear() {}
 				keys() {}
 				vlues() {}
@@ -85,6 +96,7 @@
 			console.log(mymap.getItem(gary));
 
 			console.log(mymap);
+			console.log(mymap.length());
 		</script>
 	</body>
 </html>
