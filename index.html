@@ -103,7 +103,18 @@
 				clear() {
 					this.buckets.length = 0;
 				}
-				keys() {}
+				keys() {
+					let keyArray = [];
+					for (let bucket of this.buckets) {
+						if (bucket) {
+							for (let i = 0; i < bucket.length; i++) {
+								keyArray.push(bucket[i][0]);
+							}
+						}
+					}
+					return keyArray;
+				}
+
 				values() {}
 				entries() {}
 			}
@@ -120,18 +131,14 @@
 			let mymap = new hashMap(0.75, 16);
 			console.log(mymap);
 			mymap.set(gary, mymap.hash(gary));
-
 			mymap.set(leader, mymap.hash(leader));
 			mymap.set(john, mymap.hash(john));
 			mymap.set(kyle, mymap.hash(kyle));
 			mymap.set(gray, mymap.hash(gray));
 			mymap.set(nat, mymap.hash(nat));
 			mymap.set(hayden, mymap.hash(hayden));
-			mymap.remove(kyle);
-			mymap.remove(gary);
 			console.log(mymap);
-			mymap.clear();
-			console.log(mymap);
+			console.log(mymap.keys());
 		</script>
 	</body>
 </html>
