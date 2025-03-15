@@ -54,7 +54,15 @@
 					}
 				}
 
-				has(key) {}
+				has(key) {
+					let index = this.hash(key);
+					if (!this.buckets[index]) {
+						console.log("There is no record of this");
+					}
+					if (this.buckets[index]) {
+						console.log(key + " is here");
+					}
+				}
 				remove(key) {}
 				length() {
 					let length = 0;
@@ -94,9 +102,11 @@
 			mymap.set(nat, mymap.hash(nat));
 			mymap.set(hayden, mymap.hash(hayden));
 			console.log(mymap.getItem(gary));
-
 			console.log(mymap);
 			console.log(mymap.length());
+			mymap.has(gary);
+			mymap.has("maple");
+			mymap.has("gary");
 		</script>
 	</body>
 </html>
