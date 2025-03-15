@@ -63,7 +63,31 @@
 						console.log(key + " is here");
 					}
 				}
-				remove(key) {}
+				remove(key) {
+					let index = this.hash(key);
+					if (!this.buckets[index]) {
+						console.log("Can't remove what aint there cheif");
+					}
+					if (
+						this.buckets[index].length === 1 &&
+						this.buckets[index][0][0] === key
+					) {
+						console.log("there is only one thing here " + key);
+						delete this.buckets[index];
+					} else {
+						console.log("gonezo");
+						console.log(this.buckets[index].length);
+
+						for (let i = 0; i < this.buckets[index].length; i++) {
+							if (this.buckets[index][i][0] === key) {
+								console.log("found it " + this.buckets[index][i][0]);
+								delete this.buckets[index][i];
+							}
+							console.log(this.buckets[index].length);
+						}
+					}
+				}
+
 				length() {
 					let length = 0;
 					for (let bucket of this.buckets) {
@@ -76,9 +100,11 @@
 					return length;
 				}
 
-				clear() {}
+				clear() {
+					this.buckets.length = 0;
+				}
 				keys() {}
-				vlues() {}
+				values() {}
 				entries() {}
 			}
 
@@ -92,7 +118,7 @@
 			let hayden = "hayden";
 
 			let mymap = new hashMap(0.75, 16);
-			console.log(mymap.hash(gary));
+			console.log(mymap);
 			mymap.set(gary, mymap.hash(gary));
 
 			mymap.set(leader, mymap.hash(leader));
@@ -101,12 +127,11 @@
 			mymap.set(gray, mymap.hash(gray));
 			mymap.set(nat, mymap.hash(nat));
 			mymap.set(hayden, mymap.hash(hayden));
-			console.log(mymap.getItem(gary));
+			mymap.remove(kyle);
+			mymap.remove(gary);
 			console.log(mymap);
-			console.log(mymap.length());
-			mymap.has(gary);
-			mymap.has("maple");
-			mymap.has("gary");
+			mymap.clear();
+			console.log(mymap);
 		</script>
 	</body>
 </html>
