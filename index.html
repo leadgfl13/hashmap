@@ -9,16 +9,11 @@
 		test
 
 		<script>
-			//console.log(buckets.length);
-			//	if (index < 0 || index >= buckets.length) {
-			//		throw new Error("Trying to access index out of bounds");
-			//	}
-
 			class hashMap {
 				constructor(loadfactor, capacity) {
 					this.loadfactor = loadfactor;
 					this.capacity = capacity;
-					this.buckets = new Array(capacity);
+					this.buckets = [];
 				}
 
 				hash(key) {
@@ -101,7 +96,7 @@
 				}
 
 				clear() {
-					this.buckets.length = 0;
+					this.buckets = [];
 				}
 				keys() {
 					let keyArray = [];
@@ -115,7 +110,18 @@
 					return keyArray;
 				}
 
-				values() {}
+				values() {
+					let valueArray = [];
+					for (let bucket of this.buckets) {
+						if (bucket) {
+							for (let i = 0; i < bucket.length; i++) {
+								valueArray.push(bucket[i][1]);
+							}
+						}
+					}
+					return valueArray;
+				}
+
 				entries() {}
 			}
 
@@ -131,14 +137,14 @@
 			let mymap = new hashMap(0.75, 16);
 			console.log(mymap);
 			mymap.set(gary, mymap.hash(gary));
-			mymap.set(leader, mymap.hash(leader));
-			mymap.set(john, mymap.hash(john));
-			mymap.set(kyle, mymap.hash(kyle));
-			mymap.set(gray, mymap.hash(gray));
-			mymap.set(nat, mymap.hash(nat));
-			mymap.set(hayden, mymap.hash(hayden));
 			console.log(mymap);
+			mymap.clear();
+			mymap.set("mo", mymap.hash("mo"));
+			mymap.set(gary, mymap.hash(gary));
+			mymap.set(kyle, mymap.hash(kyle));
 			console.log(mymap.keys());
+			console.log(mymap.values());
+			console.log(mymap);
 		</script>
 	</body>
 </html>
