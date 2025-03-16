@@ -122,7 +122,19 @@
 					return valueArray;
 				}
 
-				entries() {}
+				entries() {
+					let theEntries = [];
+					for (let bucket of this.buckets) {
+						if (bucket) {
+							for (let i = 0; i < bucket.length; i++) {
+								let key = bucket[i][0];
+								let value = bucket[i][1];
+								theEntries.push(key, value);
+							}
+						}
+					}
+					return theEntries;
+				}
 			}
 
 			let gary = "gary";
@@ -142,9 +154,11 @@
 			mymap.set("mo", mymap.hash("mo"));
 			mymap.set(gary, mymap.hash(gary));
 			mymap.set(kyle, mymap.hash(kyle));
+			mymap.set(nat, mymap.hash(nat));
 			console.log(mymap.keys());
 			console.log(mymap.values());
 			console.log(mymap);
+			console.log(mymap.entries());
 		</script>
 	</body>
 </html>
