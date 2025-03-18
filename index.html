@@ -34,19 +34,11 @@
 					} else {
 						console.log("That key already exists!");
 					}
-					this.buckets[index].push([key, value]);
+					this.buckets[index] = value;
 				}
 				getItem(key) {
 					let index = this.hash(key);
-					if (!this.buckets[index]) {
-						return null;
-					}
-					for (let bucket of this.buckets[index]) {
-						if (bucket[0] === key) {
-							console.log("weiner");
-							return bucket[1];
-						}
-					}
+					return this.buckets[index];
 				}
 
 				has(key) {
@@ -84,15 +76,7 @@
 				}
 
 				length() {
-					let length = 0;
-					for (let bucket of this.buckets) {
-						if (bucket) {
-							for (let i = 0; i < bucket.length; i++) {
-								length++;
-							}
-						}
-					}
-					return length;
+					return this.buckets.length;
 				}
 
 				clear() {
@@ -137,28 +121,37 @@
 				}
 			}
 
-			let gary = "gary";
-			let gray = "gray";
+			const test = new hashMap(0.75, 16);
+			test.set("apple", "red");
+			test.set("banana", "yellow");
+			test.set("carrot", "orange");
+			test.set("dog", "brown");
+			test.set("elephant", "gray");
+			test.set("frog", "green");
+			test.set("grape", "purple");
+			test.set("hat", "black");
+			test.set("ice cream", "white");
+			test.set("jacket", "blue");
+			test.set("kite", "pink");
+			test.set("lion", "golden");
+			test.set("moon", "silver");
 
-			let leader = "leader";
-			let john = "john";
-			let kyle = "kyle";
-			let nat = "nat";
-			let hayden = "hayden";
+			console.log(test);
+			console.log(test.length());
+			console.log(test.getItem("moon"));
+			test.set("moon", "dark");
+			console.log(test.getItem("moon"));
+			console.log(test.length());
+			test.set("moon", "bold");
+			console.log(test.getItem("moon"));
+			test.set("gary", "leader");
+			test.set("maple", "tricolor");
+			test.set("taz", "midnight");
+			test.set("oaky", "creamsicle");
+			test.set("scaleyboy", "citrus");
 
-			let mymap = new hashMap(0.75, 16);
-			console.log(mymap);
-			mymap.set(gary, mymap.hash(gary));
-			console.log(mymap);
-			mymap.clear();
-			mymap.set("mo", mymap.hash("mo"));
-			mymap.set(gary, mymap.hash(gary));
-			mymap.set(kyle, mymap.hash(kyle));
-			mymap.set(nat, mymap.hash(nat));
-			console.log(mymap.keys());
-			console.log(mymap.values());
-			console.log(mymap);
-			console.log(mymap.entries());
+			console.log(test.length());
+			console.log(test);
 		</script>
 	</body>
 </html>
