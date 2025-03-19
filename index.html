@@ -28,7 +28,21 @@
 
 				set(key, value) {
 					let index = this.hash(key);
-					this.table[index] = value;
+					let bucket = this.table[index];
+					if (!bucket) {
+						bucket = [[key, value]];
+						console.log(bucket);
+					} else {
+						for (let i = 0; i < bucket.length; i++) {
+							console.log(bucket[i][0]);
+							if (bucket[i][0] === key) {
+								console.log("match");
+								bucket[i][2] = value;
+							} else {
+								console.log("popp");
+							}
+						}
+					}
 				}
 				getItem(key) {
 					let index = this.hash(key);
@@ -70,18 +84,18 @@
 				}
 
 				length() {
-					return this.buckets.length;
+					return this.table.length;
 				}
 
 				clear() {
-					this.buckets = [];
+					this.table = [];
 				}
 				keys() {
 					let keyArray = [];
-					for (let bucket of this.buckets) {
-						if (bucket) {
-							for (let i = 0; i < bucket.length; i++) {
-								keyArray.push(bucket[i][0]);
+					for (let tables of this.table) {
+						if (tables) {
+							for (let i = 0; i < tables.length; i++) {
+								keyArray.push(tables[i][0]);
 							}
 						}
 					}
@@ -90,7 +104,7 @@
 
 				values() {
 					let valueArray = [];
-					for (let bucket of this.buckets) {
+					for (let bucket of this.table) {
 						if (bucket) {
 							for (let i = 0; i < bucket.length; i++) {
 								valueArray.push(bucket[i][1]);
@@ -117,8 +131,7 @@
 
 			const test = new hashMap(0.75, 16);
 			test.set("gary", "leader");
-			console.log(test);
-			console.log(test.getItem("gary"));
+			test.set("gary", "weiner");
 		</script>
 	</body>
 </html>
