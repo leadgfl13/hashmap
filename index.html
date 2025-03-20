@@ -10,10 +10,10 @@
 
 		<script>
 			class hashMap {
-				constructor(loadfactor, capacity) {
-					this.table = new Array(capacity);
+				constructor(loadfactor, size) {
+					this.table = new Array(size);
 					this.loadfactor = loadfactor;
-					this.capacity = capacity;
+					this.size = size;
 				}
 
 				hash(key) {
@@ -30,20 +30,17 @@
 					let index = this.hash(key);
 					let bucket = this.table[index];
 					if (!bucket) {
-						bucket = [[key, value]];
-						console.log(bucket);
+						this.table[index] = [[key, value]];
 					} else {
-						for (let i = 0; i < bucket.length; i++) {
-							console.log(bucket[i][0]);
-							if (bucket[i][0] === key) {
-								console.log("match");
-								bucket[i][2] = value;
-							} else {
-								console.log("popp");
-							}
+						const sameKey = bucket.find((item) => item[0] === key);
+						if (sameKey) {
+							sameKey[1] = value;
+						} else {
+							bucket.push([key, value]);
 						}
 					}
 				}
+
 				getItem(key) {
 					let index = this.hash(key);
 					return this.table[index];
@@ -90,10 +87,13 @@
 				clear() {
 					this.table = [];
 				}
+
 				keys() {
 					let keyArray = [];
+					console.log(this.table);
 					for (let tables of this.table) {
 						if (tables) {
+							console.log(tables);
 							for (let i = 0; i < tables.length; i++) {
 								keyArray.push(tables[i][0]);
 							}
@@ -127,11 +127,23 @@
 					}
 					return theEntries;
 				}
+				display() {
+					console.log("pp");
+					for (let i = 0; i < this.table.length; i++) {
+						if (this.table[i]) {
+							console.log(i + this.table[i]);
+						}
+					}
+				}
 			}
 
 			const test = new hashMap(0.75, 16);
 			test.set("gary", "leader");
 			test.set("gary", "weiner");
+			test.set("yrag", "poop");
+			test.display();
+			console.log(test.values());
+			console.log(test);
 		</script>
 	</body>
 </html>
