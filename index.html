@@ -57,25 +57,19 @@
 				}
 				remove(key) {
 					let index = this.hash(key);
-					if (!this.buckets[index]) {
-						console.log("Can't remove what aint there cheif");
+					if (!this.table[index]) {
 					}
 					if (
-						this.buckets[index].length === 1 &&
-						this.buckets[index][0][0] === key
+						this.table[index].length === 1 &&
+						this.table[index][0][0] === key
 					) {
-						console.log("there is only one thing here " + key);
-						delete this.buckets[index];
+						delete this.table[index];
 					} else {
-						console.log("gonezo");
-						console.log(this.buckets[index].length);
-
-						for (let i = 0; i < this.buckets[index].length; i++) {
-							if (this.buckets[index][i][0] === key) {
-								console.log("found it " + this.buckets[index][i][0]);
-								delete this.buckets[index][i];
+						for (let i = 0; i < this.table[index].length; i++) {
+							if (this.table[index][i][0] === key) {
+								console.log("found it " + this.table[index][i][0]);
+								delete this.table[index][i];
 							}
-							console.log(this.buckets[index].length);
 						}
 					}
 				}
@@ -138,11 +132,20 @@
 			}
 
 			const test = new hashMap(0.75, 16);
-			test.set("gary", "leader");
-			test.set("gary", "weiner");
-			test.set("yrag", "poop");
-			test.display();
-			console.log(test.values());
+			test.set("apple", "red");
+			test.set("banana", "yellow");
+			test.set("carrot", "orange");
+			test.set("dog", "brown");
+			test.set("elephant", "gray");
+			test.set("frog", "green");
+			test.set("grape", "purple");
+			test.set("hat", "black");
+			test.set("ice cream", "white");
+			test.set("jacket", "blue");
+			test.set("kite", "pink");
+			test.set("lion", "golden");
+			test.set("moon", "silver");
+			test.remove("lion");
 			console.log(test);
 		</script>
 	</body>
