@@ -10,7 +10,7 @@
 
 		<script>
 			class hashMap {
-				constructor(loadfactor, size) {
+				constructor(loadfactor = 0.75, size = 16) {
 					this.table = new Array(size);
 					this.loadfactor = loadfactor;
 					this.size = size;
@@ -29,6 +29,7 @@
 				set(key, value) {
 					let index = this.hash(key);
 					let bucket = this.table[index];
+
 					if (!bucket) {
 						this.table[index] = [[key, value]];
 					} else {
@@ -131,7 +132,7 @@
 				}
 			}
 
-			const test = new hashMap(0.75, 16);
+			const test = new hashMap();
 			test.set("apple", "red");
 			test.set("banana", "yellow");
 			test.set("carrot", "orange");
@@ -145,8 +146,10 @@
 			test.set("kite", "pink");
 			test.set("lion", "golden");
 			test.set("moon", "silver");
-			test.remove("lion");
+			test.set("mo", "wife");
 			console.log(test);
+
+			console.log(test.loadfactor);
 		</script>
 	</body>
 </html>
