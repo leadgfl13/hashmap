@@ -153,7 +153,29 @@
 					let index = this.hash(key);
 					if (!this.table[index]) {
 						this.table[index] = [];
-						this.table[index].push(key, value);
+					}
+					this.table[index].push([key, value]);
+				}
+
+				get(key) {
+					let index = this.hash(key);
+					if (!this.table[index]) {
+						console.log("Key not found");
+						return;
+					} // let makes a reference of a variable, because it is saying
+					// let something equal what this looks liked
+					// vs just saying something equals it, allows you to change the
+					//name of the variable itself
+					let bucket = "";
+					bucket = this.table[index];
+					for (let i = 0; i < bucket.length; i++) {
+						console.log(bucket[i]);
+						if ((key = this.table.index[i][0])) {
+							console.log("Got it");
+						} else {
+							console.log("no key");
+							return;
+						}
 					}
 				}
 			}
@@ -161,7 +183,10 @@
 			const test2 = new hasher();
 
 			test2.set("gary", "leader");
+			test2.set("Maureen", "Berical");
+			test2.get("gary");
 			console.log(test2);
+			test2.get("oid");
 		</script>
 	</body>
 </html>
