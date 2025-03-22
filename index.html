@@ -166,11 +166,10 @@
 					// let something equal what this looks liked
 					// vs just saying something equals it, allows you to change the
 					//name of the variable itself
-					let bucket = "";
-					bucket = this.table[index];
+					let bucket = this.table[index];
 					for (let i = 0; i < bucket.length; i++) {
-						console.log(bucket[i]);
-						if ((key = this.table.index[i][0])) {
+						console.log(bucket[i][0]);
+						if ((key = bucket[i][0])) {
 							console.log("Got it");
 						} else {
 							console.log("no key");
