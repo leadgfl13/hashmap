@@ -207,20 +207,35 @@
 
 				remove(key) {
 					let index = this.hash(key);
-					if ((this.table[index].length = 1)) {
+					if (this.table[index].length === 1) {
 						delete this.table[index][0];
 					} else {
-						console.log(this.table[index].length);
+						for (let i = 0; i < this.table[index].length; i++)
+							if (key === this.table[index][i][0]) {
+								console.log("hello");
+
+								delete this.table[index][i];
+							}
 					}
 				}
 			}
 
 			const test2 = new hasher();
+			test2.set("apple", "red");
+			test2.set("banana", "yellow");
+			test2.set("carrot", "orange");
+			test2.set("dog", "brown");
+			test2.set("elephant", "gray");
+			test2.set("frog", "green");
+			test2.set("grape", "purple");
+			test2.set("hat", "black");
+			test2.set("ice cream", "white");
+			test2.set("jacket", "blue");
+			test2.set("kite", "pink");
+			test2.set("lion", "golden");
 
-			test2.set("gary", "leader");
-			test2.set("Maureen", "Berical");
-
-			test2.remove("gary");
+			console.log(test2);
+			test2.remove("hat");
 			console.log(test2);
 		</script>
 	</body>
