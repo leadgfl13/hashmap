@@ -85,10 +85,8 @@
 
 				keys() {
 					let keyArray = [];
-					console.log(this.table);
 					for (let tables of this.table) {
 						if (tables) {
-							console.log(tables);
 							for (let i = 0; i < tables.length; i++) {
 								keyArray.push(tables[i][0]);
 							}
@@ -152,7 +150,6 @@
 				set(key, value) {
 					// spot to put in check to see if it needs to grow
 					let ratio = this.table.length * this.load;
-					console.log(ratio);
 
 					let index = this.hash(key);
 					if (!this.table[index]) {
@@ -184,10 +181,7 @@
 
 				keys() {
 					let keys = [];
-					console.log(this.table.length);
-
 					for (let i = 0; i < this.table.length; i++) {
-						console.log("hello");
 						if (this.table[i]) {
 							for (let j = 0; j < this.table[i].length; j++) {
 								let thearray = this.table[i][j];
@@ -200,10 +194,7 @@
 
 				values() {
 					let values = [];
-					console.log(this.table.length);
-
 					for (let i = 0; i < this.table.length; i++) {
-						console.log("hello");
 						if (this.table[i]) {
 							for (let j = 0; j < this.table[i].length; j++) {
 								let thearray = this.table[i][j];
@@ -213,17 +204,24 @@
 					}
 					return values;
 				}
+
+				remove(key) {
+					let index = this.hash(key);
+					if ((this.table[index].length = 1)) {
+						delete this.table[index][0];
+					} else {
+						console.log(this.table[index].length);
+					}
+				}
 			}
 
 			const test2 = new hasher();
 
 			test2.set("gary", "leader");
 			test2.set("Maureen", "Berical");
-			test2.get("gary");
+
+			test2.remove("gary");
 			console.log(test2);
-			test2.get("oid");
-			console.log(test2.keys());
-			console.log(test2.values());
 		</script>
 	</body>
 </html>
