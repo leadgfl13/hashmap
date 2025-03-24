@@ -150,6 +150,10 @@
 				}
 
 				set(key, value) {
+					// spot to put in check to see if it needs to grow
+					let ratio = this.table.length * this.load;
+					console.log(ratio);
+
 					let index = this.hash(key);
 					if (!this.table[index]) {
 						this.table[index] = [];
