@@ -209,6 +209,7 @@
 					let index = this.hash(key);
 					if (this.table[index].length === 1) {
 						delete this.table[index][0];
+						size--;
 					} else {
 						for (let i = 0; i < this.table[index].length; i++)
 							if (key === this.table[index][i][0]) {
@@ -216,6 +217,7 @@
 
 								delete this.table[index][i];
 							}
+						size--;
 					}
 				}
 			}
