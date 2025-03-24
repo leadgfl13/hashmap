@@ -177,6 +177,23 @@
 						}
 					}
 				}
+
+				keys() {
+					let keys = [];
+					console.log(this.table.length);
+
+					for (let i = 0; i < this.table.length; i++) {
+						console.log("hello");
+						if (this.table[i]) {
+							for (let j = 0; j < this.table[i].length; j++) {
+								let thearray = this.table[i][j];
+								console.log(thearray[0]);
+								keys.push(thearray[0]);
+							}
+						}
+					}
+					return keys;
+				}
 			}
 
 			const test2 = new hasher();
@@ -186,6 +203,7 @@
 			test2.get("gary");
 			console.log(test2);
 			test2.get("oid");
+			console.log(test2.keys());
 		</script>
 	</body>
 </html>
