@@ -187,12 +187,27 @@
 						if (this.table[i]) {
 							for (let j = 0; j < this.table[i].length; j++) {
 								let thearray = this.table[i][j];
-								console.log(thearray[0]);
 								keys.push(thearray[0]);
 							}
 						}
 					}
 					return keys;
+				}
+
+				values() {
+					let values = [];
+					console.log(this.table.length);
+
+					for (let i = 0; i < this.table.length; i++) {
+						console.log("hello");
+						if (this.table[i]) {
+							for (let j = 0; j < this.table[i].length; j++) {
+								let thearray = this.table[i][j];
+								values.push(thearray[1]);
+							}
+						}
+					}
+					return values;
 				}
 			}
 
@@ -204,6 +219,7 @@
 			console.log(test2);
 			test2.get("oid");
 			console.log(test2.keys());
+			console.log(test2.values());
 		</script>
 	</body>
 </html>
