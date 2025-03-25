@@ -149,10 +149,13 @@
 				}
 
 				set(key, value) {
-					this.entries++;
+					this.entries += 1;
 					console.log(this.entries);
 					let ratio = this.table.length * this.load;
-					if (ratio > this.size) {
+
+					console.log(this.entries + " entries and the ratio is " + ratio);
+
+					if (this.entries >= this.size) {
 						console.log("too big");
 					}
 
@@ -212,7 +215,6 @@
 
 				remove(key) {
 					let index = this.hash(key);
-					console.log(this.table[index]);
 					if (this.table[index].length === 1) {
 						delete this.table[index][0];
 					} else {
@@ -241,8 +243,8 @@
 			test2.set("lion", "golden");
 
 			console.log(test2);
-			test2.remove("hat");
 			console.log(test2);
+			test2.set("wombat", "Gray");
 		</script>
 	</body>
 </html>
