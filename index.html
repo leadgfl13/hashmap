@@ -10,8 +10,8 @@
 
 		<script>
 			class hashMap {
-				constructor(loadfactor = 0.75, size = 16) {
-					this.table = new Array(size);
+				constructor(loadfactor = 0.75, size) {
+					this.table = new Array(0);
 					this.loadfactor = loadfactor;
 					this.size = size;
 				}
@@ -132,9 +132,10 @@
 
 			class hasher {
 				constructor(size = 16, load = 0.75) {
-					this.size = 16;
-					this.load = load;
 					this.table = new Array(size);
+					this.size = size;
+					this.load = load;
+					this.entries = 0;
 				}
 
 				hash(key) {
@@ -148,8 +149,12 @@
 				}
 
 				set(key, value) {
-					// spot to put in check to see if it needs to grow
+					this.entries++;
+					console.log(this.entries);
 					let ratio = this.table.length * this.load;
+					if (ratio > this.size) {
+						console.log("too big");
+					}
 
 					let index = this.hash(key);
 					if (!this.table[index]) {
@@ -207,9 +212,9 @@
 
 				remove(key) {
 					let index = this.hash(key);
+					console.log(this.table[index]);
 					if (this.table[index].length === 1) {
 						delete this.table[index][0];
-						size--;
 					} else {
 						for (let i = 0; i < this.table[index].length; i++)
 							if (key === this.table[index][i][0]) {
@@ -217,7 +222,6 @@
 
 								delete this.table[index][i];
 							}
-						size--;
 					}
 				}
 			}
