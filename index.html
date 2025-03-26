@@ -155,15 +155,14 @@
 					let ratio = this.size * this.load;
 					if (this.entries > ratio) {
 						console.log("too big, must grow");
-						const table = new Array(this.size * 2); //make a new table double sized
-						this.size = this.size * 2;
-
+						this.size = this.size * 2; //set the size attribute to double the size
+						const table = new Array(this.size); //make a new table double sized
 						for (let i = 0; i < this.table.length; i++) {
-							if (this.table[i]) {
-								let index = this.table[i];
-								for (let j = 0; j < index.length; j++) {
-									let key = index[0][0];
-									let value = index[0][1];
+							let bucket = this.table[i];
+							if (bucket) {
+								for (let j = 0; j < bucket.length; j++) {
+									let key = bucket[0][0];
+									let value = bucket[0][1];
 									let newindex = this.hash(key);
 									if (!table[newindex]) {
 										table[newindex] = [];
@@ -248,16 +247,16 @@
 			test2.set("apple", "red");
 			test2.set("banana", "yellow");
 			test2.set("carrot", "orange");
-			test2.set("dog", "brown");
 			test2.set("elephant", "gray");
 			test2.set("frog", "green");
-			test2.set("grape", "purple");
 			test2.set("hat", "black");
 			test2.set("ice cream", "white");
 			test2.set("jacket", "blue");
 			test2.set("kite", "pink");
 			test2.set("lion", "golden");
 			test2.set("wombat", "Gray");
+			test2.set("grape,'purple");
+			test2.set("wombat", "gray");
 			console.log(test2);
 		</script>
 	</body>
