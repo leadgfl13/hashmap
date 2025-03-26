@@ -150,6 +150,11 @@
 				}
 
 				set(key, value) {
+					let index = this.hash(key);
+					if (!this.table[index]) {
+						this.table[index] = [];
+					}
+					this.table[index].push([key, value]);
 					this.entries += 1;
 					console.log(this.entries);
 					let ratio = this.size * this.load;
@@ -158,27 +163,25 @@
 						this.size = this.size * 2; //set the size attribute to double the size
 						const table = new Array(this.size); //make a new table double sized
 						for (let i = 0; i < this.table.length; i++) {
-							let bucket = this.table[i];
+							//for every item in the labe
+							let bucket = this.table[i]; //let bucket be the index
 							if (bucket) {
+								//if there is an index
 								for (let j = 0; j < bucket.length; j++) {
-									let key = bucket[0][0];
-									let value = bucket[0][1];
-									let newindex = this.hash(key);
+									//for every item at that index
+									let key = bucket[j][0]; //let the key equal the first part of that array
+									let value = bucket[j][1]; //let the value equal the second part of that array
+									let newindex = this.hash(key); //new index equal the hash of the key
 									if (!table[newindex]) {
-										table[newindex] = [];
+										//if there is no spot for that hash
+										table[newindex] = []; //let the spot equal an empty array
 									}
-									table[newindex].push([key, value]);
+									table[newindex].push([key, value]); //push the new key and value into that array
 								}
 							}
 						}
-						this.table = table;
+						this.table = table; //let the old table equal the new table
 					}
-
-					let index = this.hash(key);
-					if (!this.table[index]) {
-						this.table[index] = [];
-					}
-					this.table[index].push([key, value]);
 				}
 
 				get(key) {
