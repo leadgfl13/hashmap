@@ -154,9 +154,16 @@
 					if (!this.table[index]) {
 						this.table[index] = [];
 					}
+					for (let i = 0; i < this.table[index].length; i++) {
+						if (this.table[index][i][0] === key) {
+							this.table[index][i][1] = value;
+							return;
+						}
+					}
+
 					this.table[index].push([key, value]);
 					this.entries += 1;
-					console.log(this.entries);
+
 					let ratio = this.size * this.load;
 					if (this.entries > ratio) {
 						console.log("too big, must grow");
@@ -260,6 +267,7 @@
 			test2.set("wombat", "Gray");
 			test2.set("grape,'purple");
 			test2.set("wombat", "gray");
+			test2.set("wombat", "blue");
 			console.log(test2);
 		</script>
 	</body>
