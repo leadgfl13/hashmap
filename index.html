@@ -238,6 +238,27 @@
 					return values;
 				}
 
+				poop() {
+					console.log("weiner");
+					for (let i = 0; i < this.table.length; i++) {
+						let index = this.table[i];
+						if (index) {
+							for (let j = 0; j < index.length; j++) {
+								let bucketarray = index[j];
+								console.log(
+									"Index " +
+										i +
+										" " +
+										"key: " +
+										bucketarray[0] +
+										" " +
+										"value: " +
+										bucketarray[1]
+								);
+							}
+						}
+					}
+				}
 				remove(key) {
 					let index = this.hash(key);
 					if (this.table[index].length === 1) {
@@ -265,10 +286,12 @@
 			test2.set("kite", "pink");
 			test2.set("lion", "golden");
 			test2.set("wombat", "Gray");
-			test2.set("grape,'purple");
+			test2.set("grape", "purple");
 			test2.set("wombat", "gray");
 			test2.set("wombat", "blue");
-			console.log(test2);
+			test2.set("mo", "butt");
+			test2.keys();
+			test2.poop();
 		</script>
 	</body>
 </html>
