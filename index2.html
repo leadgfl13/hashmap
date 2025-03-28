@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+	</head>
+	<body>
+		oh boy...
+	</body>
+
+	<script>
+		class Node {
+			constructor(key = null, value = null, next = null) {
+				this.key = key;
+				this.value = value;
+				this.next = next;
+			}
+		}
+
+		class linkedList {
+			constructor(head = null, tail = null) {
+				this.head = head;
+				this.tail = tail;
+				this.size = 0;
+			}
+
+			append(key, value) {
+				let node = new Node(key, value);
+				if (!this.head) {
+					this.head = node;
+				} else {
+					let current = this.head;
+					while (current) {
+						if (!current.next) {
+							current.next = node;
+							this.size++;
+							return;
+						} else {
+							current = current.next;
+						}
+					}
+				}
+				this.size++;
+			}
+
+			toString() {
+				if (this.size === 0) {
+					console.log("Nothing here");
+				} else {
+					let currentnode = this.head;
+					let stringsentence = " ";
+
+					while (currentnode) {
+						stringsentence +=
+							`(key:${currentnode.key} value:${currentnode.value})` + "-> ";
+						currentnode = currentnode.next;
+					}
+					console.log(stringsentence);
+				}
+			}
+		}
+
+		let list = new linkedList();
+		list.append("bear", "carnivore");
+		list.append("cat", "feline");
+		list.toString();
+		console.log(list);
+		class hashMap {}
+	</script>
+</html>
