@@ -61,6 +61,15 @@
 			}
 		}
 
+		class hashMap {
+			constructor(size = 16, load = 0.75) {
+				this.size = size;
+				this.load = load;
+				this.table = new Array(size);
+				this.entries = 0;
+			}
+		}
+
 		let list = new linkedList();
 		list.append("bear", "carnivore");
 		list.append("cat", "feline");
