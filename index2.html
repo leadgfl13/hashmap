@@ -18,49 +18,6 @@
 			}
 		}
 
-		class linkedList {
-			constructor(head = null, tail = null) {
-				this.head = head;
-				this.tail = tail;
-				this.size = 0;
-			}
-
-			append(key, value) {
-				let node = new Node(key, value);
-				if (!this.head) {
-					this.head = node;
-				} else {
-					let current = this.head;
-					while (current) {
-						if (!current.next) {
-							current.next = node;
-							this.size++;
-							return;
-						} else {
-							current = current.next;
-						}
-					}
-				}
-				this.size++;
-			}
-
-			toString() {
-				if (this.size === 0) {
-					console.log("Nothing here");
-				} else {
-					let currentnode = this.head;
-					let stringsentence = " ";
-
-					while (currentnode) {
-						stringsentence +=
-							`(key:${currentnode.key} value:${currentnode.value})` + "-> ";
-						currentnode = currentnode.next;
-					}
-					console.log(stringsentence);
-				}
-			}
-		}
-
 		class hashMap {
 			constructor(size = 16, load = 0.75) {
 				this.size = size;
@@ -85,6 +42,7 @@
 				let index = this.hash(key);
 				if (!this.table[index]) {
 					this.table[index] = newnode;
+					this.entries++;
 				} else {
 					let current = this.table[index];
 					while (current) {
@@ -95,9 +53,27 @@
 						if (!current.next) {
 							current.next = newnode;
 							return;
+							this.entries++;
 						}
 					}
 					current = current.next;
+				}
+				let ratio = this.size * this.load;
+				if (this.entries > ratio) {
+					console.log("too big, must grow");
+					this.size = this.size * 2; //set the size attribute to double the size
+					const newTable = new Array(this.size); //make a new table double sized
+					for (let i = 0; i < this.table.length; i++) {
+						//for every item in the labe
+						if (this.table[i]); //let list be the index
+						let list = this.table[i];
+						let newindex = this.hash(key); //new index equal the hash of the key
+						if (!newTable[newindex]) {
+							//if there is no spot for that hash
+							newTable[newindex] = []; //let the spot equal an empty array
+						}
+						newTable[newindex].push(list);
+					}
 				}
 			}
 
@@ -152,7 +128,8 @@
 		map.set("jacket", "blue");
 		map.set("kite", "pink");
 		map.set("lion", "golden");
-		map.remove("frog");
+		map.set("moon", "silver");
+
 		console.log(map);
 	</script>
 </html>
