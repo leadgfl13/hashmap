@@ -37,11 +37,15 @@
 			}
 
 			set(key, value) {
+				let ratio = this.size * this.load;
 				let newnode = new Node(key, value);
 				let index = this.hash(key);
 				if (!this.table[index]) {
 					this.table[index] = newnode;
 					this.entries++;
+					if (this.entries >= ratio) {
+						this.double();
+					}
 				} else {
 					let current = this.table[index];
 					while (current) {
@@ -52,27 +56,29 @@
 						if (!current.next) {
 							current.next = newnode;
 							this.entries++;
+							if (this.entries >= ratio) {
+								this.double();
+							}
 
 							return;
 						}
 					}
 					current = current.next;
 				}
-				let ratio = this.size * this.load;
-				if (this.entries >= ratio) {
-					this.size = this.size * 2; //set the size attribute to double the size
-					const newTable = new Array(this.size); //make a new table double sized
-					for (let i = 0; i <= this.table.length; i++) {
-						if (this.table[i]) {
-							let list = this.table[i];
-							let newindex = this.hash(list.key);
-							if (!newTable[index]) {
-								newTable[newindex] = list;
-							}
+			}
+			double() {
+				this.size = this.size * 2; //set the size attribute to double the size
+				const newTable = new Array(this.size); //make a new table double sized
+				for (let i = 0; i < this.table.length; i++) {
+					if (this.table[i]) {
+						let list = this.table[i];
+						let newindex = this.hash(list.key);
+						if (!newTable[newindex]) {
+							newTable[newindex] = list;
 						}
 					}
-					this.table = newTable;
 				}
+				this.table = newTable;
 			}
 
 			get(key) {
@@ -85,7 +91,9 @@
 					} else list = list.next;
 				}
 			}
-
+			getEntries() {
+				console.log(this.entries);
+			}
 			remove(key) {
 				let index = this.hash(key);
 				let current = this.table[index];
@@ -111,40 +119,22 @@
 		}
 
 		let map = new hashMap();
-		map.set("bear", "carnivore");
 
-		map.set("cat", "feline");
-		map.set("dog", "weird");
 		map.set("apple", "red");
 		map.set("banana", "yellow");
 		map.set("carrot", "orange");
 		map.set("dog", "brown");
 		map.set("elephant", "gray");
 		map.set("frog", "green");
+		map.set("grape", "purple");
 		map.set("hat", "black");
-		map.set("maple", "mixed");
-		console.log(map.get("maple"));
-
 		map.set("ice cream", "white");
 		map.set("jacket", "blue");
 		map.set("kite", "pink");
-		console.log(map.get("maple"));
-
 		map.set("lion", "golden");
-
 		map.set("moon", "silver");
-
-		map.set("lizard", "dragon");
-
-		map.set("cat", "oaky");
-
-		map.set("taz", "black");
-
-		map.set("orangutan", "orange");
-
-		map.set("bird", "blue");
-
-		map.set("thing", "thing2");
+		map.set("maple", "mixed");
+		console.log(map.get("maple"));
 		console.log(map);
 	</script>
 </html>
