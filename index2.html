@@ -79,13 +79,31 @@
 				}
 				return hashCode;
 			}
+
+			set(key, value) {
+				let newnode = new Node(key, value);
+				let index = this.hash(key);
+				if (!this.table[index]) {
+					this.table[index] = newnode;
+				} else {
+					let current = this.table[index];
+					while (current) {
+						if (current.key === key) {
+							current.value = value;
+							return;
+						}
+						if (!current.next) {
+							current.next = newnode;
+						}
+					}
+					current = current.next;
+				}
+			}
 		}
 
-		let list = new linkedList();
-		list.append("bear", "carnivore");
-		list.append("cat", "feline");
-		list.toString();
-		console.log(list);
-		class hashMap {}
+		let map = new hashMap();
+		map.set("bear", "carnivore");
+		map.set("cat", "feline");
+		console.log(map);
 	</script>
 </html>
