@@ -94,9 +94,22 @@
 						}
 						if (!current.next) {
 							current.next = newnode;
+							return;
 						}
 					}
 					current = current.next;
+				}
+			}
+
+			get(key) {
+				let index = this.hash(key);
+				let list = this.table[index]; //list acts as a series of nodes
+
+				while (list) {
+					if (list.key === key) {
+						console.log("found it");
+						return list.value;
+					} else list = list.next;
 				}
 			}
 		}
@@ -104,6 +117,15 @@
 		let map = new hashMap();
 		map.set("bear", "carnivore");
 		map.set("cat", "feline");
+		map.set("dog", "maple");
+		map.set("apple", "red");
+		map.set("banana", "yellow");
+		map.set("carrot", "orange");
+		map.set("dog", "brown");
+		map.set("elephant", "gray");
+		map.set("frog", "green");
+
+		console.log(map.get("cat"));
 		console.log(map);
 	</script>
 </html>
