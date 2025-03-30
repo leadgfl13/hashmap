@@ -45,6 +45,7 @@
 					this.entries += 1;
 					let ratio = this.size * this.load;
 
+					if (this.entries > ratio) {
 						console.log("too big, must grow");
 						this.size = this.size * 2; //set the size attribute to double the size
 						const table = new Array(this.size); //make a new table double sized
