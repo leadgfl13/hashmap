@@ -130,6 +130,19 @@
 				}
 				console.log(keyArray);
 			}
+			getValues() {
+				let valueArray = [];
+				for (let i = 0; i < this.table.length; i++) {
+					let current = this.table[i];
+					while (current) {
+						valueArray.push(current.value);
+						if (!current.next) {
+						}
+						current = current.next;
+					}
+				}
+				console.log(valueArray);
+			}
 		}
 
 		let map = new hashMap();
@@ -151,5 +164,6 @@
 		console.log(map.get("maple"));
 		console.log(map);
 		map.getKeys();
+		map.getValues();
 	</script>
 </html>
