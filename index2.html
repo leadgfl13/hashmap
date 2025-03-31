@@ -116,6 +116,20 @@
 					}
 				}
 			}
+
+			getKeys() {
+				let keyArray = [];
+				for (let i = 0; i < this.table.length; i++) {
+					let current = this.table[i];
+					while (current) {
+						keyArray.push(current.key);
+						if (!current.next) {
+						}
+						current = current.next;
+					}
+				}
+				console.log(keyArray);
+			}
 		}
 
 		let map = new hashMap();
@@ -136,5 +150,6 @@
 		map.set("maple", "mixed");
 		console.log(map.get("maple"));
 		console.log(map);
+		map.getKeys();
 	</script>
 </html>
