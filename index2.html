@@ -112,6 +112,7 @@
 						console.log("there is no next");
 						//need to get the node before this and set its next to null
 						current.key = null;
+						current.value = null;
 						return;
 					} else {
 						current = current.next;
@@ -139,7 +140,9 @@
 				for (let i = 0; i < this.table.length; i++) {
 					let current = this.table[i];
 					while (current) {
-						valueArray.push(current.value);
+						if (current.value) {
+							valueArray.push(current.value);
+						}
 						if (!current.next) {
 						}
 						current = current.next;
@@ -166,8 +169,8 @@
 		map.set("moon", "silver");
 		map.set("maple", "mixed");
 		console.log(map.get("maple"));
-		map.getKeys();
+		map.getValues();
 		map.remove("maple");
-		map.getKeys();
+		map.getValues();
 	</script>
 </html>
