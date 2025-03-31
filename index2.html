@@ -98,19 +98,21 @@
 				let index = this.hash(key);
 				let current = this.table[index];
 				while (current) {
-					if (current.next.key === key) {
-						if (current.next) {
-							let removenode = current.next;
-							let afternode = removenode.next;
-							current.next = afternode;
+					if (current.next && current.next.key === key) {
+						console.log("there is a next");
+						console.log(current.next);
+						console.log(current.next.key + "this is the remove key");
+						let removenode = current.next;
+						let afternode = removenode.next;
+						current.next = afternode;
 
-							return;
-						}
-						if (!current.next) {
-							//need to get the node before this and set its next to null
-							current.next = null;
-							return;
-						}
+						return;
+					}
+					if (!current.next) {
+						console.log("there is no next");
+						//need to get the node before this and set its next to null
+						current.key = null;
+						return;
 					} else {
 						current = current.next;
 					}
@@ -122,7 +124,9 @@
 				for (let i = 0; i < this.table.length; i++) {
 					let current = this.table[i];
 					while (current) {
-						keyArray.push(current.key);
+						if (current.key) {
+							keyArray.push(current.key);
+						}
 						if (!current.next) {
 						}
 						current = current.next;
@@ -162,8 +166,8 @@
 		map.set("moon", "silver");
 		map.set("maple", "mixed");
 		console.log(map.get("maple"));
-		console.log(map);
 		map.getKeys();
-		map.getValues();
+		map.remove("maple");
+		map.getKeys();
 	</script>
 </html>
