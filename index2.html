@@ -111,8 +111,8 @@
 					if (!current.next) {
 						console.log("there is no next");
 						//need to get the node before this and set its next to null
-						delete current.key;
-						delete current.value;
+						delete current.key, current.value, current.next;
+
 						return;
 					} else {
 						current = current.next;
