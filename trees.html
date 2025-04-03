@@ -10,24 +10,54 @@
 	</body>
 	<script>
 		class node {
-			constructor(left = null, right = null, value = null) {
+			constructor(value = null, left = null, right = null) {
+				this.value = value;
 				this.left = left;
 				this.right = right;
-				this.value = value;
 			}
 		}
 
 		class Tree {
 			constructor() {
-		              this.root = null
+				this.root = null;
 				this.size = 0;
 			}
 
 			isEmpty() {
-				return this.root === null
+				return this.root === null;
+			}
 
-		              }
+			buildTree(array) {
+				for (let i = 0; i < array.length; i++) {
+					let thisnode = new node(array[i]);
+					if (this.root === null) {
+						this.root = thisnode;
+					} else {
+						this.insertNode(this.root, thisnode);
+					}
+				}
+			}
+			insertNode(root, node) {
+				if (node.value > root.value) {
+					if (!root.right) {
+						root.right = node;
+					} else {
+						this.insertNode(root.right, node);
+					}
+				}
+				if (node.value < root.value) {
+					if (!root.left) {
+						root.left = node;
+					} else {
+						this.insertNode(root.left, node);
+					}
+				}
 			}
 		}
+
+		let theTree = new Tree();
+		let branch = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+		theTree.buildTree(branch);
+		console.log(theTree);
 	</script>
 </html>
