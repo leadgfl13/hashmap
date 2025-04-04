@@ -29,6 +29,7 @@
 
 			buildTree(array) {
 				for (let i = 0; i < array.length; i++) {
+					this.size++;
 					let thisnode = new node(array[i]);
 					if (this.root === null) {
 						this.root = thisnode;
@@ -53,11 +54,31 @@
 					}
 				}
 			}
+
+			search(root, value) {
+				if (!root) {
+					return false;
+					console.log("false");
+				}
+				if ((value = root.value)) {
+					return true;
+					console.log("value equals root");
+				} else if (value < root.value) {
+					console.log("its less");
+
+					return this.search(root.left, value);
+				} else {
+					console.log("its more");
+
+					return this.search(root.right, value);
+				}
+			}
 		}
 
 		let theTree = new Tree();
 		let branch = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 		theTree.buildTree(branch);
+		theTree.search(theTree.root, 1);
 		console.log(theTree);
 	</script>
 </html>
