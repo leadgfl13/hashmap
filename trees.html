@@ -70,34 +70,26 @@
 
 			getHeight(node) {
 				let height = 0;
+				if (!this.root) {
+					return height;
+				}
 
-				while (this.root) {
-					if (!this.root) {
-						console.log("No tree");
-						return;
-					}
-					if (node === this.root.value) {
-						console.log(height + " its at the base");
-						return;
-					}
-
-					if (node > this.root.value) {
-						height++;
-						console.log("height plus one right");
-						if (this.root.right) {
-							this.root = this.root.right;
-							console.log(height);
-						}
-						console.log(height);
-
-						if (node < this.root.value) {
+				if (node === this.root.value) {
+					return height;
+				} else {
+					if (node < !this.root.value && node > !this.root.value) {
+						return "hot here";
+					} else {
+						while (node > this.root.value) {
 							height++;
-							console.log("height plus one left");
-							if (this.root.left) {
-								this.root = this.root.left;
-							}
-							console.log(height);
+							this.root = this.root.right;
 						}
+
+						while (node < this.root.value) {
+							height++;
+							this.root = this.root.left;
+						}
+						return height;
 					}
 				}
 			}
@@ -108,6 +100,6 @@
 		theTree.buildTree(branch);
 		console.log(theTree.search(theTree.root, 6));
 		console.log(theTree);
-		theTree.getHeight(6345);
+		console.log(theTree.getHeight(13));
 	</script>
 </html>
