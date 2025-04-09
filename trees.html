@@ -27,7 +27,9 @@
 				const newarray = this.array.filter(
 					(item, index) => this.array.indexOf(item) === index
 				);
-				return newarray;
+
+				let midpoint = newarray[Math.floor(newarray.length / 2)];
+				return { newarray, midpoint };
 			}
 		}
 
