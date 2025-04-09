@@ -18,88 +18,21 @@
 		}
 
 		class Tree {
-			constructor() {
+			constructor(array) {
 				this.root = null;
 				this.size = 0;
+				this.array = array.sort((a, b) => b - a);
 			}
-
-			isEmpty() {
-				return this.root === null;
-			}
-
-			buildTree(array) {
-				for (let i = 0; i < array.length; i++) {
-					this.size++;
-					let thisnode = new node(array[i]);
-					if (this.root === null) {
-						this.root = thisnode;
-					} else {
-						this.insertNode(this.root, thisnode);
-					}
-				}
-			}
-			insertNode(root, node) {
-				if (node.value > root.value) {
-					if (!root.right) {
-						root.right = node;
-					} else {
-						this.insertNode(root.right, node);
-					}
-				}
-				if (node.value < root.value) {
-					if (!root.left) {
-						root.left = node;
-					} else {
-						this.insertNode(root.left, node);
-					}
-				}
-			}
-
-			search(root, value) {
-				if (!root) {
-					return false;
-				}
-				if (value === root.value) {
-					return true;
-				} else if (value < root.value) {
-					return this.search(root.left, value);
-				} else {
-					return this.search(root.right, value);
-				}
-			}
-
-			getHeight(node) {
-				let height = 0;
-				if (!this.root) {
-					return height;
-				}
-
-				if (node === this.root.value) {
-					return height;
-				} else {
-					if (node < !this.root.value && node > !this.root.value) {
-						return "hot here";
-					} else {
-						while (node > this.root.value) {
-							height++;
-							this.root = this.root.right;
-						}
-
-						while (node < this.root.value) {
-							height++;
-							this.root = this.root.left;
-						}
-						return height;
-					}
-				}
+			makeTree() {
+				const newarray = this.array.filter(
+					(item, index) => this.array.indexOf(item) === index
+				);
+				return newarray;
 			}
 		}
 
-		let theTree = new Tree();
-		let branch = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-		theTree.buildTree(branch);
-		console.log(theTree.search(theTree.root, 6));
-		console.log(theTree);
-		console.log(theTree.getHeight(13));
+		let treearray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
+		const treez = new Tree(treearray);
+		console.log(treez.makeTree());
 	</script>
 </html>
