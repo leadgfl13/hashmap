@@ -31,10 +31,24 @@
 				let midpoint = newarray[Math.floor(newarray.length / 2)];
 				return { newarray, midpoint };
 			}
+
+			makeTree2() {
+				this.array = this.array.filter(
+					(item, index) => this.array.indexOf(item) === index
+				);
+				let start = 0;
+				let end = this.array.length - 1;
+
+				let mid = Math.floor(start + end / 2);
+				let midarray = this.array[mid];
+				this.root = new node(midarray);
+			}
 		}
 
 		let treearray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 		const treez = new Tree(treearray);
 		console.log(treez.makeTree());
+		treez.makeTree2();
+		console.log(treez);
 	</script>
 </html>
