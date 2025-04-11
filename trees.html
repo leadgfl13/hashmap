@@ -30,13 +30,15 @@
 				);
 				let sorted = singlearray.sort((a, b) => a - b);
 				this.array = sorted;
-				return this.preBuild(this.array, 0, array.length - 1);
+
+				return this.preBuild(this.array, 0, this.array.length - 1);
 			}
 
 			preBuild(array, start, end) {
 				if (start > end) return null;
 				//get the midpoint of the array
 				let mid = start + Math.floor((end - start) / 2);
+				console.log(array[mid]);
 				let root = new node(array[mid]);
 				// Create left subtree
 				root.left = this.preBuild(array, start, mid - 1);
@@ -49,5 +51,6 @@
 		let treearray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
 		let thistree = new Tree(treearray);
 		console.log(thistree.buildTree(treearray));
+		console.log(thistree);
 	</script>
 </html>
