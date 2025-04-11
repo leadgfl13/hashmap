@@ -20,27 +20,34 @@
 		class Tree {
 			constructor(array) {
 				this.array = array;
+				this.root = this.buildTree(array);
 			}
 
-			sortArray() {
+			buildTree() {
 				let array = this.array;
 				let singlearray = array.filter(
 					(item, index) => array.indexOf(item) === index
 				);
 				let sorted = singlearray.sort((a, b) => a - b);
 				this.array = sorted;
-				return this.array;
+				return this.preBuild(this.array, 0, array.length - 1);
 			}
-		}
-		function buildTree(array) {
-			let singlearray = array.filter(
-				(item, index) => array.indexOf(item) === index
-			);
-			let sorted = singlearray.sort((a, b) => a - b);
-			console.log(singlearray);
+
+			preBuild(array, start, end) {
+				if (start > end) return null;
+				//get the midpoint of the array
+				let mid = start + Math.floor((end - start) / 2);
+				let root = new node(array[mid]);
+				// Create left subtree
+				root.left = this.preBuild(array, start, mid - 1);
+				//create right subtree
+				root.right = this.preBuild(array, mid + 1, end);
+				return root;
+			}
 		}
 
 		let treearray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-		buildTree(treearray);
+		let thistree = new Tree(treearray);
+		console.log(thistree.buildTree(treearray));
 	</script>
 </html>
