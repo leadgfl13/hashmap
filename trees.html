@@ -46,6 +46,25 @@
 				root.right = this.preBuild(array, mid + 1, end);
 				return root;
 			}
+
+			insert(value, root) {
+				if (this.root === null) {
+					this.root === value;
+				}
+				if (this.root.value === value) {
+					return this.root;
+				}
+				while (this.root) {
+					if (value < this.root.value) {
+						this.root = this.root.left;
+					} else if (value > this.root.value) {
+						this.root = this.root.right;
+						root.right = this.insert(value);
+					}
+				}
+			}
+
+			deleteItem(value) {}
 		}
 
 		let treearray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
